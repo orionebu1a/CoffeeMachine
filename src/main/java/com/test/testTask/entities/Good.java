@@ -13,13 +13,6 @@ import lombok.Setter;
 @Entity
 public class Good {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
     private String name;
     private int balance;
-
-    public Good(String name, int balance) {
-        this.name = name;
-        this.balance = balance;
-    }
 }

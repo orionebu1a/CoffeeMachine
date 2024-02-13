@@ -20,15 +20,15 @@ public class Coffee {
     private long id;
 
     @OneToOne
-    @JoinColumn(name = "cup_id")
+    @JoinColumn(name = "cup_value")
     private Cup cup;
 
     @OneToOne
-    @JoinColumn(name = "grade_id")
+    @JoinColumn(name = "grade_name")
     private Grade grade;
 
     @OneToOne
-    @JoinColumn(name = "type_id")
+    @JoinColumn(name = "type_name")
     private Type type;
 
     private int sugar;

@@ -1,69 +1,127 @@
 package com.test.testTask.controllers;
 
-import com.test.testTask.dtos.CupDTO;
-import com.test.testTask.dtos.GoodDTO;
-import com.test.testTask.dtos.GradeDTO;
-import com.test.testTask.dtos.TypeDTO;
 import com.test.testTask.entities.*;
 import com.test.testTask.services.CoffeeMachine;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityNotFoundException;
+
+@Api(tags = "Coffee staff controller", value = "API для пополнения запасов кофе и ингредиентов")
 @RestController
 @RequestMapping("/api/staff")
 public class StaffController {
     @Autowired
     private CoffeeMachine coffeeMachine;
 
+    @ApiOperation(value = "Добавить новый тип кофе(Капучино, Латте)")
     @PostMapping("/type/add")
-    public void createType(
-            @RequestBody TypeDTO type
+    public ResponseEntity<Type> createGrade(
+            @RequestBody Type type
     ) {
-        coffeeMachine.addType(new Type(type.getName()));
+        Type createdType;
+        try{
+            createdType = coffeeMachine.addType(type);
+        }
+        catch (IllegalAccessError e){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(createdType);
     }
 
+    @ApiOperation(value = "Пополнить запас существующего объема стакана")
     @GetMapping("/cup/refill")
-    public Cup cupRefill(
-            @RequestParam String cupName,
+    public ResponseEntity<Cup> cupRefill(
+            @RequestParam float value,
             @RequestParam int amount
     ) {
-        return coffeeMachine.refillCup(cupName, amount);
+        Cup cup;
+        try{
+            cup = coffeeMachine.refillCup(value, amount);
+        }
+        catch (EntityNotFoundException e){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(cup);
     }
 
+    @ApiOperation(value = "Добавить новый объем стакана")
     @PostMapping("/cup/add")
-    public void createCup(
-            @RequestBody CupDTO cup
+    public ResponseEntity<Cup> createCup(
+            @RequestBody Cup cup
     ) {
-        coffeeMachine.addCup(new Cup(cup.getName(), cup.getBalance()));
+        Cup createdCup;
+        try{
+            createdCup = coffeeMachine.addCup(cup);
+        }
+        catch (IllegalAccessError e){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(createdCup);
     }
 
+    @ApiOperation(value = "Пополнить запас существующего сорта кофе")
     @GetMapping("/grade/refill")
-    public Grade gradeRefill(
+    public ResponseEntity<Grade> gradeRefill(
             @RequestParam String gradeName,
             @RequestParam int amount
     ) {
-        return coffeeMachine.refillGrade(gradeName, amount);
+        Grade grade;
+        try{
+            grade = coffeeMachine.refillGrade(gradeName, amount);
+        }
+        catch (EntityNotFoundException e){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(grade);
     }
 
+    @ApiOperation(value = "Добавить новый сорт кофе")
     @PostMapping("/grade/add")
-    public void createGrade(
-            @RequestBody GradeDTO grade
+    public ResponseEntity<Grade> createGrade(
+            @RequestBody Grade grade
     ) {
-        coffeeMachine.addGrade(new Grade(grade.getName(), grade.getBalance(), grade.getRoast()));
+        Grade createdGrade;
+        try{
+            createdGrade = coffeeMachine.addGrade(grade);
+        }
+        catch (IllegalAccessError e){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(createdGrade);
     }
 
+    @ApiOperation(value = "Пополнить запас существующего ингредиента")
     @GetMapping("/good/refill")
-    public Good goodRefill(
+    public ResponseEntity<Good> goodRefill(
             @RequestParam String goodName,
             @RequestParam int amount
     ) {
-        return coffeeMachine.refillGood(goodName, amount);
+        Good good;
+        try{
+            good = coffeeMachine.refillGood(goodName, amount);
+        }
+        catch (EntityNotFoundException e){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(good);
     }
 
+    @ApiOperation(value = "Добавить новый тип ингредиента")
     @PostMapping("/good/add")
-    public void createGood(
-            @RequestBody GoodDTO good
+    public ResponseEntity<Good> createGood(
+            @RequestBody Good good
     ) {
-        coffeeMachine.addGood(new Good(good.getName(), good.getBalance()));
+        Good createdGood;
+        try{
+            createdGood = coffeeMachine.addGood(good);
+        }
+        catch (IllegalAccessError e){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(createdGood);
     }
 }

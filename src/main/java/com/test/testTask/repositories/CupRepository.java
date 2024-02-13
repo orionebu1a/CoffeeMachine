@@ -7,6 +7,6 @@ import java.util.Optional;
 
 @Repository
 public interface CupRepository extends JpaRepository<Cup, Long> {
-    Optional<Cup> findByName(String cupName);
+    Optional<Cup> findByValue(float value);
     Optional<Cup> findFirstByBalanceGreaterThan(int quantity);
 }

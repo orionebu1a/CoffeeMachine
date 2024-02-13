@@ -13,13 +13,6 @@ import lombok.Setter;
 @Entity
 public class Cup {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    private String name;
+    private float value;
     private int balance;
-
-    public Cup(String name, int balance) {
-        this.balance = balance;
-        this.name = name;
-    }
 }

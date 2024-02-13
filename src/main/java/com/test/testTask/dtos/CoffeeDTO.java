@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class CoffeeDTO {
-    private String cupName;
+    private float cupValue;
 
     private String gradeName;
 
@@ -29,7 +29,7 @@ public class CoffeeDTO {
     private int time;
 
     public CoffeeDTO(Coffee coffee){
-        cupName = coffee.getCup().getName();
+        cupValue = coffee.getCup().getValue();
         gradeName = coffee.getGrade().getName();
         typeName = coffee.getType().getName();
         sugar = coffee.getSugar();

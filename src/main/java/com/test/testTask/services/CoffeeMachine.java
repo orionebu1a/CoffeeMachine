@@ -6,6 +6,7 @@ import javax.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -35,8 +36,8 @@ public class CoffeeMachine {
         }
     }
 
-    public Cup refillCup(String cupName, int count) {
-        Optional<Cup> optionalCup = cupRepository.findByName(cupName);
+    public Cup refillCup(float cupValue, int count) {
+        Optional<Cup> optionalCup = cupRepository.findByValue(cupValue);
         if (optionalCup.isPresent()) {
             Cup foundCup = optionalCup.get();
             foundCup.setBalance(foundCup.getBalance() + count);
@@ -57,20 +58,32 @@ public class CoffeeMachine {
         }
     }
 
-    public void addType(Type type) {
-        typeRepository.save(type);
+    public Type addType(Type type) {
+        if(typeRepository.findByName(type.getName()).isPresent()){
+            throw new IllegalArgumentException();
+        }
+        return typeRepository.save(type);
     }
 
-    public void addCup(Cup cup) {
-        cupRepository.save(cup);
+    public Cup addCup(Cup cup) {
+        if(cupRepository.findByValue(cup.getValue()).isPresent()){
+            throw new IllegalArgumentException();
+        }
+        return cupRepository.save(cup);
     }
 
-    public void addGrade(Grade grade) {
-        gradeRepository.save(grade);
+    public Grade addGrade(Grade grade) {
+        if(gradeRepository.findByName(grade.getName()).isPresent()){
+            throw new IllegalArgumentException();
+        }
+        return gradeRepository.save(grade);
     }
 
-    public void addGood(Good good) {
-        goodRepository.save(good);
+    public Good addGood(Good good) {
+        if(goodRepository.findByName(good.getName()).isPresent()){
+            throw new IllegalArgumentException();
+        }
+        return goodRepository.save(good);
     }
 
     public Type findOrAnyType(String typeName){
@@ -104,7 +117,7 @@ public class CoffeeMachine {
         if (cupName.equals("any")) {
             optionalCup = cupRepository.findFirstByBalanceGreaterThan(0);
         } else {
-            optionalCup = cupRepository.findByName(cupName);
+            optionalCup = cupRepository.findByValue(Float.parseFloat(cupName));
         }
         if (optionalCup.isEmpty()) {
             throw new EntityNotFoundException();
