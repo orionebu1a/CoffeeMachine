@@ -69,6 +69,10 @@ public class CoffeeMachine {
         gradeRepository.save(grade);
     }
 
+    public void addGood(Good good) {
+        goodRepository.save(good);
+    }
+
     public Type findOrAnyType(String typeName){
         Optional<Type> optionalType;
         if (typeName.equals("any")) {
