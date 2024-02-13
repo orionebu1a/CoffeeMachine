@@ -16,8 +16,9 @@ public class ClientController {
     public Coffee prepareCoffee(
             @RequestParam(defaultValue = "any") String type,
             @RequestParam(defaultValue = "any") String grade,
+            @RequestParam(defaultValue = "any") String size,
             @RequestParam(defaultValue = "0") int sugarAmount
     ) {
-        return coffeeMachine.makeCoffee(type, grade, sugarAmount);
+        return coffeeMachine.makeCoffee(type, grade, size, sugarAmount);
     }
 }

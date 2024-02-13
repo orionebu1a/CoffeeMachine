@@ -19,9 +19,6 @@ public class Type {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
-    @OneToMany
-    @JoinColumn(name = "type_id")
-    private List<Good> goodsNeeded = new ArrayList<>();
 }
 
 

@@ -21,8 +21,5 @@ public class Grade {
     private String name;
     private int roast;
     private int balance;
-    @OneToMany
-    @JoinColumn(name = "grade_id")
-    private List<Type> types = new ArrayList<>();
 }
 

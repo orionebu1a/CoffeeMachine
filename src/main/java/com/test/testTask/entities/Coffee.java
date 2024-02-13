@@ -30,5 +30,7 @@ public class Coffee {
     @JoinColumn(name = "type_id")
     private Type type;
 
+    private int sugar;
+
     private LocalDateTime time;
 }
