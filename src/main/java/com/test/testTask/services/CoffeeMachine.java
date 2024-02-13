@@ -2,7 +2,7 @@ package com.test.testTask.services;
 
 import com.test.testTask.entities.*;
 import com.test.testTask.repositories.*;
-import jakarta.persistence.EntityNotFoundException;
+import javax.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -76,7 +76,7 @@ public class CoffeeMachine {
     public Type findOrAnyType(String typeName){
         Optional<Type> optionalType;
         if (typeName.equals("any")) {
-            optionalType = typeRepository.findFirst();
+            optionalType = typeRepository.findRandomType();
         } else {
             optionalType = typeRepository.findByName(typeName);
         }
