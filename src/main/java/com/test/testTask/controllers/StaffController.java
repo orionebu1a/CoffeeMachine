@@ -1,5 +1,9 @@
 package com.test.testTask.controllers;
 
+import com.test.testTask.dtos.CupDTO;
+import com.test.testTask.dtos.GoodDTO;
+import com.test.testTask.dtos.GradeDTO;
+import com.test.testTask.dtos.TypeDTO;
 import com.test.testTask.entities.*;
 import com.test.testTask.services.CoffeeMachine;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +16,10 @@ public class StaffController {
     private CoffeeMachine coffeeMachine;
 
     @PostMapping("/type/add")
-    public void cupRefill(
-            @RequestBody Type type
+    public void createType(
+            @RequestBody TypeDTO type
     ) {
-        coffeeMachine.addType(type);
+        coffeeMachine.addType(new Type(type.getName()));
     }
 
     @GetMapping("/cup/refill")
@@ -27,10 +31,10 @@ public class StaffController {
     }
 
     @PostMapping("/cup/add")
-    public void cupRefill(
-            @RequestBody Cup cup
+    public void createCup(
+            @RequestBody CupDTO cup
     ) {
-        coffeeMachine.addCup(cup);
+        coffeeMachine.addCup(new Cup(cup.getName(), cup.getBalance()));
     }
 
     @GetMapping("/grade/refill")
@@ -42,10 +46,10 @@ public class StaffController {
     }
 
     @PostMapping("/grade/add")
-    public void gradeRefill(
-            @RequestBody Grade grade
+    public void createGrade(
+            @RequestBody GradeDTO grade
     ) {
-        coffeeMachine.addGrade(grade);
+        coffeeMachine.addGrade(new Grade(grade.getName(), grade.getBalance(), grade.getRoast()));
     }
 
     @GetMapping("/good/refill")
@@ -57,9 +61,9 @@ public class StaffController {
     }
 
     @PostMapping("/good/add")
-    public void goodRefill(
-            @RequestBody Good good
+    public void createGood(
+            @RequestBody GoodDTO good
     ) {
-        coffeeMachine.addGood(good);
+        coffeeMachine.addGood(new Good(good.getName(), good.getBalance()));
     }
 }

@@ -16,6 +16,7 @@ repositories {
 }
 
 dependencies {
+	implementation 'org.modelmapper:modelmapper:2.4.4'
 	runtimeOnly 'org.postgresql:postgresql'
 	implementation 'javax.persistence:javax.persistence-api:2.2'
 	implementation 'io.springfox:springfox-boot-starter:3.0.0'

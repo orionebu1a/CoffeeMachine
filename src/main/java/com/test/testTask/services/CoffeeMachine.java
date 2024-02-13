@@ -117,17 +117,17 @@ public class CoffeeMachine {
         Grade grade = findOrAnyGrade(gradeName);
         Cup cup = findOrAnyCup(cupName);
 
-        Optional<Good> optionalGood = goodRepository.findByName("sugar");
-        if (optionalGood.isEmpty()) {
-            throw new EntityNotFoundException();
-        }
-
-        Good good = optionalGood.get();
-
-        if (good.getBalance() - sugarAmount < 0) {
-            throw new EntityNotFoundException();
-        } else {
-            good.setBalance(good.getBalance() - sugarAmount);
+        if(sugarAmount > 0){
+            Optional<Good> optionalGood = goodRepository.findByName("sugar");
+            if (optionalGood.isEmpty()) {
+                throw new EntityNotFoundException();
+            }
+            Good good = optionalGood.get();
+            if (good.getBalance() - sugarAmount < 0) {
+                throw new EntityNotFoundException();
+            } else {
+                good.setBalance(good.getBalance() - sugarAmount);
+            }
         }
 
         grade.setBalance(grade.getBalance() - 1);

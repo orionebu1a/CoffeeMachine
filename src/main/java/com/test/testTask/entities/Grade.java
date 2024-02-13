@@ -19,5 +19,11 @@ public class Grade {
     private String name;
     private int roast;
     private int balance;
+
+    public Grade(String name, int balance, int roast) {
+        this.balance = balance;
+        this.name = name;
+        this.roast = roast;
+    }
 }
 

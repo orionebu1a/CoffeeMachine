@@ -16,6 +16,10 @@ public class Type {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
+
+    public Type(String name) {
+        this.name = name;
+    }
 }
 
 

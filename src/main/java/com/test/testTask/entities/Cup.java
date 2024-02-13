@@ -17,4 +17,9 @@ public class Cup {
     private long id;
     private String name;
     private int balance;
+
+    public Cup(String name, int balance) {
+        this.balance = balance;
+        this.name = name;
+    }
 }
