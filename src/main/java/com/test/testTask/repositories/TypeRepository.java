@@ -11,5 +11,6 @@ public interface TypeRepository extends JpaRepository<Type, Long> {
     Optional<Type> findByName(String typeName);
     @Query(value = "SELECT * FROM Type ORDER BY RANDOM() LIMIT 1", nativeQuery = true)
     Optional<Type> findRandomType();
+    void deleteByName(String name);
 }
 

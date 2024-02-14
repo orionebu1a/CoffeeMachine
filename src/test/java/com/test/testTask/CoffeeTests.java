@@ -32,7 +32,7 @@ class CoffeeTests {
 
     @Test
     @Transactional
-    void testCreateCup() throws Exception {
+    void testCreateRefillRemoveCup() throws Exception {
         Cup cup = new Cup();
         cup.setValue(0.4f);
         cup.setBalance(10);
@@ -41,14 +41,22 @@ class CoffeeTests {
                 .content(objectMapper.writeValueAsString(cup))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.balance").value(cup.getBalance()))
                 .andExpect(jsonPath("$.value").value(cup.getValue()));
+
+        mockMvc.perform(get("/api/staff/cup/refill")
+                .param("value", String.valueOf(cup.getValue()))
+                .param("amount", "1"))
+                .andExpect(jsonPath("$.balance").value(cup.getBalance() + 1));
+
+        mockMvc.perform(post("/api/staff/cup/remove")
+                .param("value", String.valueOf(cup.getValue())))
+                .andExpect(status().isOk());
     }
 
     @Transactional
     @Test
-    void testCreateGrade() throws Exception {
+    void testCreateRefillRemoveGrade() throws Exception {
         Grade grade = new Grade();
         grade.setName("Gentleman");
         grade.setBalance(4);
@@ -62,11 +70,20 @@ class CoffeeTests {
                 .andExpect(jsonPath("$.name").value(grade.getName()))
                 .andExpect(jsonPath("$.balance").value(grade.getBalance()))
                 .andExpect(jsonPath("$.roast").value(grade.getRoast()));
+
+        mockMvc.perform(get("/api/staff/grade/refill")
+                .param("gradeName", String.valueOf(grade.getName()))
+                .param("amount", "1"))
+                .andExpect(jsonPath("$.balance").value(grade.getBalance() + 1));
+
+        mockMvc.perform(post("/api/staff/grade/remove")
+                .param("gradeName", grade.getName()))
+                .andExpect(status().isOk());
     }
 
     @Transactional
     @Test
-    void testCreateType() throws Exception {
+    void testCreateRemoveType() throws Exception {
         Type type = new Type();
         type.setName("raf");
 
@@ -76,11 +93,15 @@ class CoffeeTests {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.name").value(type.getName()));
+
+        mockMvc.perform(post("/api/staff/type/remove")
+                .param("typeName", type.getName()))
+                .andExpect(status().isOk());
     }
 
     @Transactional
     @Test
-    void testCreateGood() throws Exception {
+    void testCreateRefillRemoveGood() throws Exception {
         Good good = new Good();
         good.setName("sugar");
         good.setBalance(5);
@@ -92,6 +113,15 @@ class CoffeeTests {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.name").value(good.getName()))
                 .andExpect(jsonPath("$.balance").value(good.getBalance()));
+
+        mockMvc.perform(get("/api/staff/good/refill")
+                .param("goodName", String.valueOf(good.getName()))
+                .param("amount", "1"))
+                .andExpect(jsonPath("$.balance").value(good.getBalance() + 1));
+
+        mockMvc.perform(post("/api/staff/good/remove")
+                .param("goodName", good.getName()))
+                .andExpect(status().isOk());
     }
 
     @Transactional

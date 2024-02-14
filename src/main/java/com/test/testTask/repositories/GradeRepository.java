@@ -9,4 +9,5 @@ import java.util.Optional;
 public interface GradeRepository extends JpaRepository<Grade, Long> {
     Optional<Grade> findByName(String gradeName);
     Optional<Grade> findFirstByBalanceGreaterThan(int quantity);
+    void deleteByName(String name);
 }

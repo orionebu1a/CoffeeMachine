@@ -9,4 +9,5 @@ import java.util.Optional;
 public interface CupRepository extends JpaRepository<Cup, Long> {
     Optional<Cup> findByValue(float value);
     Optional<Cup> findFirstByBalanceGreaterThan(int quantity);
+    void deleteByValue(float value);
 }

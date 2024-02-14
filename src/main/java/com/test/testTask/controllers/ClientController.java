@@ -4,6 +4,7 @@ import com.test.testTask.dtos.CoffeeDTO;
 import com.test.testTask.entities.Coffee;
 import com.test.testTask.services.CoffeeMachine;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +21,7 @@ public class ClientController {
     @Autowired
     private CoffeeMachine coffeeMachine;
 
+    @ApiOperation(value = "Приготовить кофе")
     @GetMapping("/make")
     public ResponseEntity<CoffeeDTO> prepareCoffee(
             @RequestParam(defaultValue = "any") String type,

@@ -26,10 +26,24 @@ public class StaffController {
         try{
             createdType = coffeeMachine.addType(type);
         }
-        catch (IllegalAccessError e){
+        catch (IllegalArgumentException e){
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(createdType);
+    }
+
+    @ApiOperation(value = "Удалить тип кофе")
+    @PostMapping("/type/remove")
+    public ResponseEntity<String> removeType(
+            @RequestParam String typeName
+    ) {
+        try{
+            coffeeMachine.removeType(typeName);
+        }
+        catch (IllegalArgumentException e){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok().build();
     }
 
     @ApiOperation(value = "Пополнить запас существующего объема стакана")
@@ -57,10 +71,24 @@ public class StaffController {
         try{
             createdCup = coffeeMachine.addCup(cup);
         }
-        catch (IllegalAccessError e){
+        catch (IllegalArgumentException e){
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(createdCup);
+    }
+
+    @ApiOperation(value = "Удалить объем сткана")
+    @PostMapping("/cup/remove")
+    public ResponseEntity<String> removeCup(
+            @RequestParam float value
+    ) {
+        try{
+            coffeeMachine.removeCup(value);
+        }
+        catch (IllegalArgumentException e){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok().build();
     }
 
     @ApiOperation(value = "Пополнить запас существующего сорта кофе")
@@ -88,10 +116,24 @@ public class StaffController {
         try{
             createdGrade = coffeeMachine.addGrade(grade);
         }
-        catch (IllegalAccessError e){
+        catch (IllegalArgumentException e){
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(createdGrade);
+    }
+
+    @ApiOperation(value = "Удалить сорт кофе")
+    @PostMapping("/grade/remove")
+    public ResponseEntity<String> removeGrade(
+            @RequestParam String gradeName
+    ) {
+        try{
+            coffeeMachine.removeGrade(gradeName);
+        }
+        catch (IllegalArgumentException e){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok().build();
     }
 
     @ApiOperation(value = "Пополнить запас существующего ингредиента")
@@ -123,5 +165,19 @@ public class StaffController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(createdGood);
+    }
+
+    @ApiOperation(value = "Удалить тип ингредиента")
+    @PostMapping("/good/remove")
+    public ResponseEntity<String> removeGood(
+            @RequestParam String goodName
+    ) {
+        try{
+            coffeeMachine.removeGood(goodName);
+        }
+        catch (IllegalArgumentException e){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok().build();
     }
 }

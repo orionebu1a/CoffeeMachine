@@ -154,4 +154,32 @@ public class CoffeeMachine {
         coffee.setTime(LocalDateTime.now());
         return coffeeRepository.save(coffee);
     }
+
+    public void removeGood(String goodName) {
+        if(!goodRepository.findByName(goodName).isPresent()){
+            throw new IllegalArgumentException();
+        }
+        goodRepository.deleteByName(goodName);
+    }
+
+    public void removeGrade(String gradeName) {
+        if(!gradeRepository.findByName(gradeName).isPresent()){
+            throw new IllegalArgumentException();
+        }
+        gradeRepository.deleteByName(gradeName);
+    }
+
+    public void removeCup(float value) {
+        if(!cupRepository.findByValue(value).isPresent()){
+            throw new IllegalArgumentException();
+        }
+        cupRepository.deleteByValue(value);
+    }
+
+    public void removeType(String typeName) {
+        if(!typeRepository.findByName(typeName).isPresent()){
+            throw new IllegalArgumentException();
+        }
+        typeRepository.deleteByName(typeName);
+    }
 }
