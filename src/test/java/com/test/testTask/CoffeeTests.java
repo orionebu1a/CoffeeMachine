@@ -1,10 +1,14 @@
 package com.test.testTask;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.test.testTask.entities.Cup;
-import com.test.testTask.entities.Good;
-import com.test.testTask.entities.Grade;
-import com.test.testTask.entities.Type;
+import com.test.testTask.server.entities.CupImpl;
+import com.test.testTask.server.entities.GoodImpl;
+import com.test.testTask.server.entities.GradeImpl;
+import com.test.testTask.server.entities.TypeImpl;
+import com.test.testTask.shared.domain.Cup;
+import com.test.testTask.shared.domain.Good;
+import com.test.testTask.shared.domain.Grade;
+import com.test.testTask.shared.domain.Type;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -33,7 +37,7 @@ class CoffeeTests {
     @Test
     @Transactional
     void testCreateRefillRemoveCup() throws Exception {
-        Cup cup = new Cup();
+        Cup cup = new CupImpl();
         cup.setValue(0.4f);
         cup.setBalance(10);
 
@@ -57,7 +61,7 @@ class CoffeeTests {
     @Transactional
     @Test
     void testCreateRefillRemoveGrade() throws Exception {
-        Grade grade = new Grade();
+        Grade grade = new GradeImpl();
         grade.setName("Gentleman");
         grade.setBalance(4);
         grade.setRoast(10);
@@ -84,7 +88,7 @@ class CoffeeTests {
     @Transactional
     @Test
     void testCreateRemoveType() throws Exception {
-        Type type = new Type();
+        Type type = new TypeImpl();
         type.setName("raf");
 
         mockMvc.perform(post("/api/staff/type/add")
@@ -102,7 +106,7 @@ class CoffeeTests {
     @Transactional
     @Test
     void testCreateRefillRemoveGood() throws Exception {
-        Good good = new Good();
+        Good good = new GoodImpl();
         good.setName("sugar");
         good.setBalance(5);
 
@@ -128,22 +132,22 @@ class CoffeeTests {
     @Test
     void testCreateResourcesSuccessfulMakeCoffee() throws Exception {
         mockMvc.perform(post("/api/staff/good/add")
-                .content(objectMapper.writeValueAsString(new Good("sugar", 5)))
+                .content(objectMapper.writeValueAsString(new GoodImpl("sugar", 5)))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
         mockMvc.perform(post("/api/staff/grade/add")
-                .content(objectMapper.writeValueAsString(new Grade("Robusta", 4, 10)))
+                .content(objectMapper.writeValueAsString(new GradeImpl("Robusta", 4, 10)))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
         mockMvc.perform(post("/api/staff/cup/add")
-                .content(objectMapper.writeValueAsString(new Cup(0.4f, 10)))
+                .content(objectMapper.writeValueAsString(new CupImpl(0.4f, 10)))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
         mockMvc.perform(post("/api/staff/type/add")
-                .content(objectMapper.writeValueAsString(new Type("raf")))
+                .content(objectMapper.writeValueAsString(new TypeImpl("raf")))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
