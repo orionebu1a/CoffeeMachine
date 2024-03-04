@@ -1,6 +1,5 @@
 package com.test.testTask.server.services;
 
-import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.test.testTask.server.entities.*;
 import com.test.testTask.server.repositories.*;
 import com.test.testTask.shared.domain.*;
@@ -10,15 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
-import javax.servlet.annotation.WebServlet;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 @AllArgsConstructor
 @Service
-@WebServlet("/gwt-rpc/yourGwtRpcService")
-public class CoffeeServiceImpl extends RemoteServiceServlet implements CoffeeService {
+public class CoffeeServiceImpl implements CoffeeService {
 
     @Autowired
     private final CupRepository cupRepository;

@@ -2,77 +2,44 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
     <artifactId>test_task</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <name>test_task</name>
+    <packaging>war</packaging>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.7.RELEASE</version>
+        <relativePath />
+    </parent>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>1.8</java.version>
+        <gwt.version>2.8.1</gwt.version>
+        <google.gin.version>2.1.2</google.gin.version>
+        <gwt.bootstrap.version>0.9.3</gwt.bootstrap.version>
+        <gwt.eventbinder.version>1.1.0</gwt.eventbinder.version>
+        <gwt.resty.version>2.2.1</gwt.resty.version>
+        <gwt.mockito.version>1.1.6</gwt.mockito.version>
+        <kissmda.maven.plugin.version>2.1.1</kissmda.maven.plugin.version>
+        <kissmda.cartridges.simple.java.version>2.1.1</kissmda.cartridges.simple.java.version>
+        <kissmda.extensions.importpacker.version>2.1.1</kissmda.extensions.importpacker.version>
+    </properties>
+
     <dependencies>
+        <!-- Spring -->
         <dependency>
-            <groupId>com.google.gwt</groupId>
-            <artifactId>gwt-servlet</artifactId>
-            <scope>runtime</scope>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
-
         <dependency>
-            <groupId>com.google.gwt</groupId>
-            <artifactId>gwt-user</artifactId>
-            <version>${gwt.version}</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-actuator-docs</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>com.google.gwt</groupId>
-            <artifactId>gwt-dev</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.tomcat.embed</groupId>
-            <artifactId>tomcat-embed-jasper</artifactId>
-            <version>9.0.43</version>
-        </dependency>
-
-        <!-- ModelMapper -->
-        <dependency>
-            <groupId>org.modelmapper</groupId>
-            <artifactId>modelmapper</artifactId>
-            <version>2.4.4</version>
-        </dependency>
-
-        <!-- PostgreSQL JDBC Driver (Runtime Only) -->
-        <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>42.7.2</version>
-        </dependency>
-
-        <!-- Java Persistence API -->
-        <dependency>
-            <groupId>javax.persistence</groupId>
-            <artifactId>javax.persistence-api</artifactId>
-            <version>2.2</version>
-        </dependency>
-
-        <!-- Springfox Boot Starter -->
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-            <version>3.0.0</version>
-        </dependency>
-
-        <!-- Lombok (Compile Only) -->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.30</version>
-            <scope>provided</scope>
-        </dependency>
-
-<!--        <dependency>-->
-<!--            <groupId>io.swagger.core.v3</groupId>-->
-<!--            <artifactId>swagger-annotations</artifactId>-->
-<!--            <version>2.0.0-rc2</version> &lt;!&ndash; Use the latest version available &ndash;&gt;-->
-<!--            <scope>compile</scope>-->
-<!--        </dependency>-->
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -80,55 +47,51 @@
 
         <dependency>
             <groupId>io.springfox</groupId>
-            <artifactId>springfox-boot-starter</artifactId>
-            <version>3.0.0</version>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>3.0.0</version> <!-- Use the latest version available -->
         </dependency>
+
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>3.0.0</version> <!-- Use the latest version available -->
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.22</version> <!-- Use the latest version available -->
+            <scope>provided</scope>
+        </dependency>
+        <!-- Use this Spring Tool for restarting the app automatically -->
+        <!-- Only use this if you don't use JRebel! -->
+        <!--
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+        </dependency>
+        -->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-devtools</artifactId>-->
-<!--            <scope>runtime</scope>-->
-<!--        </dependency>-->
-
+        <!-- Spring Test -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <scope>runtime</scope>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-
-<!--        <dependency>-->
-<!--            <groupId>io.swagger</groupId>-->
-<!--            <artifactId>swagger-annotations</artifactId>-->
-<!--            <version>2.0.0-rc2</version>-->
-<!--        </dependency>-->
-
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-autoconfigure</artifactId>
-            <version>2.5.3</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
-            <version>RELEASE</version>
-            <scope>compile</scope>
+            <groupId>org.springframework.restdocs</groupId>
+            <artifactId>spring-restdocs-mockmvc</artifactId>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
@@ -143,25 +106,20 @@
             <version>1.1.1</version>
         </dependency>
 
+        <!-- GWT -->
         <dependency>
-            <groupId>org.fusesource.restygwt</groupId>
-            <artifactId>restygwt</artifactId>
-            <version>${gwt.resty.version}</version>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-user</artifactId>
+            <version>${gwt.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>validation-api</artifactId>
+                    <groupId>javax.validation</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
-            <version>6.0.9</version>
-        </dependency>
-
-        <dependency>
-            <groupId>io.swagger.core.v3</groupId>
-            <artifactId>swagger-core</artifactId>
-            <version>2.2.7</version>
-        </dependency>
-
+        <!-- Gin -->
         <dependency>
             <groupId>com.google.gwt.inject</groupId>
             <artifactId>gin</artifactId>
@@ -187,127 +145,328 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
         <dependency>
             <groupId>org.gwtbootstrap3</groupId>
             <artifactId>gwtbootstrap3-extras</artifactId>
             <version>${gwt.bootstrap.version}</version>
         </dependency>
 
+        <!-- RestyGWT -->
         <dependency>
-            <groupId>org.sonatype.sisu</groupId>
-            <artifactId>sisu-inject-bean</artifactId>
-            <version>1.4.2</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.enterprise</groupId>
-            <artifactId>cdi-api</artifactId>
-            <version>1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-            <version>6.0.9</version>
+            <groupId>org.fusesource.restygwt</groupId>
+            <artifactId>restygwt</artifactId>
+            <version>${gwt.resty.version}</version>
         </dependency>
 
+        <!-- GWT Mockito -->
+        <dependency>
+            <groupId>com.google.gwt.gwtmockito</groupId>
+            <artifactId>gwtmockito</artifactId>
+            <version>${gwt.mockito.version}</version>
+            <scope>test</scope>
+        </dependency>
 
+        <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-dev</artifactId>
+            <version>${gwt.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- PostGreSQL for Heroku -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+        </dependency>
     </dependencies>
-    <name>test_task</name>
-    <packaging>war</packaging>
-
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.7.0</version>
-        <relativePath/> <!-- lookup parent from repository -->
-    </parent>
-
-    <groupId>com.example</groupId>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>com.google.gwt</groupId>
-                <artifactId>gwt</artifactId>
-                <version>${gwt.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-
-
-        </dependencies>
-    </dependencyManagement>
 
     <build>
-        <!-- Output classes directly into the webapp, -->
-        <!-- so that IDEs and "mvn process-classes" update them in DevMode -->
-        <outputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/classes</outputDirectory>
         <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-            <!-- GWT Maven Plugin -->
-            <plugin>
-                <groupId>net.ltgt.gwt.maven</groupId>
-                <artifactId>gwt-maven-plugin</artifactId>
-                <version>${gwt.plugin.version}</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>compile</goal>
-                            <goal>test</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <moduleName>com.test.testTask.test</moduleName>
-                    <moduleShortName>Google_web_toolkit</moduleShortName>
-                    <failOnError>true</failOnError>
-                    <!-- GWT compiler 2.8 requires 1.8, hence define sourceLevel here -->
-                    <!--if you use a different source language for java compilation -->
-                    <sourceLevel>${maven.compiler.source}</sourceLevel>
-                    <!-- Compiler configuration -->
-                    <compilerArgs>
-                        <!-- Ask GWT to create the Story of Your Compile (SOYC) (gwt:compile) -->
-                        <arg>-compileReport</arg>
-                        <arg>-XcompilerMetrics</arg>
-                    </compilerArgs>
-                    <!-- DevMode configuration -->
-                    <warDir>${project.build.directory}/${project.build.finalName}</warDir>
-                    <classpathScope>compile+runtime</classpathScope>
-                    <!-- URL(s) that should be opened by DevMode (gwt:devmode). -->
-                    <startupUrls>
-                        <startupUrl>Google_web_toolkit.html</startupUrl>
-                    </startupUrls>
-                </configuration>
-            </plugin>
-            <!-- Skip normal test execution, we use gwt:test instead -->
-            <plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <skip>true</skip>
-                </configuration>
-            </plugin>
+<!--            <plugin>-->
+<!--                <groupId>org.springframework.boot</groupId>-->
+<!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
+<!--            </plugin>-->
+<!--            <plugin>-->
+<!--                <groupId>org.codehaus.mojo</groupId>-->
+<!--                <artifactId>gwt-maven-plugin</artifactId>-->
+<!--                <version>${gwt.version}</version>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <goals>-->
+<!--                            <goal>compile</goal>-->
+<!--                            <goal>i18n</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--                <configuration>-->
+<!--                    <sourceLevel>1.8</sourceLevel>-->
+<!--                    <module>com.test.testTask</module>-->
+<!--                    <extraJvmArgs>-Xmx1024M -Xss1024k</extraJvmArgs>-->
+<!--                    <runTarget>index.html</runTarget>-->
+<!--                    <persistentunitcachedir>${project.build.directory}</persistentunitcachedir>-->
+<!--                    <webappDirectory>${project.build.directory}/classes/public</webappDirectory>-->
+<!--                    <deploy>${project.build.directory}/gwt-deploy</deploy>-->
+<!--                    <generateJsInteropExports>true</generateJsInteropExports>-->
+<!--                    <launcherDir>${project.build.directory}/classes/public</launcherDir>-->
+<!--                    <codeServerPort>4456</codeServerPort>-->
+<!--                    <style>DETAILED</style>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
+<!--            <plugin>-->
+<!--                <groupId>org.codehaus.mojo</groupId>-->
+<!--                <artifactId>build-helper-maven-plugin</artifactId>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <id>add-source</id>-->
+<!--                        <phase>generate-sources</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>add-source</goal>-->
+<!--                        </goals>-->
+<!--                        <configuration>-->
+<!--                            <sources>-->
+<!--                                <source>${project.build.directory}/generated-sources/java</source>-->
+<!--                                <source>${project.build.directory}/generated-sources/gwt</source>-->
+<!--                            </sources>-->
+<!--                        </configuration>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
+
+<!--            <plugin>-->
+<!--                <groupId>de.crowdcode.kissmda.maven</groupId>-->
+<!--                <artifactId>kissmda-maven-plugin</artifactId>-->
+<!--                <version>${kissmda.maven.plugin.version}</version>-->
+<!--                <dependencies>-->
+<!--                    &lt;!&ndash; Cartridges and Extensions should be used in the generation phase &ndash;&gt;-->
+<!--                    <dependency>-->
+<!--                        <groupId>de.crowdcode.kissmda.cartridges</groupId>-->
+<!--                        <artifactId>kissmda-cartridges-simple-java</artifactId>-->
+<!--                        <version>${kissmda.cartridges.simple.java.version}</version>-->
+<!--                    </dependency>-->
+<!--                    <dependency>-->
+<!--                        <groupId>de.crowdcode.kissmda.cartridges</groupId>-->
+<!--                        <artifactId>kissmda-extensions-import-packer</artifactId>-->
+<!--                        <version>${kissmda.extensions.importpacker.version}</version>-->
+<!--                    </dependency>-->
+<!--                </dependencies>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <phase>generate-sources</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>generate</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--                <configuration>-->
+<!--                    &lt;!&ndash; You have to choose between transformerScanPackageNames and transformerNameWithOrders-->
+<!--                        If you put both the transformerNameWithOrders wins &ndash;&gt;-->
+<!--                    <transformerScanPackageNames>-->
+<!--                        &lt;!&ndash; You get all the transformers under this package name &ndash;&gt;-->
+<!--                        <transformerScanPackageName>de.crowdcode.kissmda.cartridges</transformerScanPackageName>-->
+<!--                    </transformerScanPackageNames>-->
+<!--                    &lt;!&ndash; We put both, so this transformerNameWithOrders wins &ndash;&gt;-->
+<!--                    <transformerNameWithOrders>-->
+<!--                        &lt;!&ndash; You put the transformers with order &ndash;&gt;-->
+<!--                        <transformerNameWithOrder>-->
+<!--                            2:de.crowdcode.kissmda.extensions.importpacker.ImportPackerTransformer-->
+<!--                        </transformerNameWithOrder>-->
+<!--                        <transformerNameWithOrder>-->
+<!--                            3:de.crowdcode.kissmda.cartridges.simplejava.SimpleJavaTransformer-->
+<!--                        </transformerNameWithOrder>-->
+<!--                    </transformerNameWithOrders>-->
+<!--                    <modelFile>src/main/resources/model/emf/demo-gwt-springboot.uml</modelFile>-->
+<!--                    <loggingLevel>SEVERE</loggingLevel>-->
+<!--                    <targetEncoding>UTF-8</targetEncoding>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
+
+            <!-- Compile LESS to CSS -->
+<!--            <plugin>-->
+<!--                <groupId>org.lesscss</groupId>-->
+<!--                <artifactId>lesscss-maven-plugin</artifactId>-->
+<!--                <version>1.7.0.1.1</version>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <id>interserohless</id>-->
+<!--                        <configuration>-->
+<!--&lt;!&ndash;                            <sourceDirectory>${project.basedir}/src/main/resources/com/lofidewanto/demo/resource/themes/interseroh/css/</sourceDirectory>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <outputDirectory>${project.build.directory}/classes/com/lofidewanto/demo/resource/themes/interseroh/css/</outputDirectory>&ndash;&gt;-->
+<!--                            <compress>true</compress>-->
+<!--                            <includes>-->
+<!--                                <include>individual.less</include>-->
+<!--                                <include>interseroh-bootstrap.less</include>-->
+<!--                                <include>topmenubar.less</include>-->
+<!--                                <include>variable.less</include>-->
+<!--                            </includes>-->
+<!--                        </configuration>-->
+<!--                        <goals>-->
+<!--                            <goal>compile</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
         </plugins>
+
+        <pluginManagement>
+            <plugins>
+                <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+                <plugin>
+                    <groupId>org.eclipse.m2e</groupId>
+                    <artifactId>lifecycle-mapping</artifactId>
+                    <version>1.0.0</version>
+                    <configuration>
+                        <lifecycleMappingMetadata>
+                            <pluginExecutions>
+                                <pluginExecution>
+                                    <pluginExecutionFilter>
+                                        <groupId>
+                                            de.crowdcode.kissmda.maven
+                                        </groupId>
+                                        <artifactId>
+                                            kissmda-maven-plugin
+                                        </artifactId>
+                                        <versionRange>
+                                            [2.0.0,)
+                                        </versionRange>
+                                        <goals>
+                                            <goal>generate</goal>
+                                        </goals>
+                                    </pluginExecutionFilter>
+                                    <action>
+                                        <ignore></ignore>
+                                    </action>
+                                </pluginExecution>
+                            </pluginExecutions>
+                        </lifecycleMappingMetadata>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
 
-    <properties>
-        <!-- Setting maven.compiler.source to something different to 1.8 needs that you configure the -->
-        <!-- sourceLevel in gwt-maven-plugin since GWT compiler 2.8 requires 1.8 -->
-        <!--(see gwt-maven-plugin block below) -->
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <gwt.version>2.8.2</gwt.version>
-        <gwt.plugin.version>1.0-rc-8</gwt.plugin.version>
-        <gwt.resty.version>2.2.1</gwt.resty.version>
-        <google.gin.version>2.1.2</google.gin.version>
-        <gwt.bootstrap.version>0.9.3</gwt.bootstrap.version>
-        <gwt.eventbinder.version>1.1.0</gwt.eventbinder.version>
-        <kissmda.maven.plugin.version>2.1.1</kissmda.maven.plugin.version>
-        <kissmda.cartridges.simple.java.version>2.1.1</kissmda.cartridges.simple.java.version>
-        <kissmda.extensions.importpacker.version>2.1.1</kissmda.extensions.importpacker.version>
-    </properties>
+    <profiles>
+        <profile>
+            <id>development</id>
+            <build>
+                <plugins>
+                    <!-- JRebel plugin, you need to turn off Spring Tool! -->
+                    <plugin>
+                        <groupId>org.zeroturnaround</groupId>
+                        <artifactId>jrebel-maven-plugin</artifactId>
+                        <version>1.1.5</version>
+                        <configuration>
+                            <relativePath>.</relativePath>
+                            <classpath>
+                                <fallback>default</fallback>
+                                <resources>
+                                    <resource>
+                                    </resource>
+                                </resources>
+                            </classpath>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>generate-rebel-xml</id>
+                                <phase>process-resources</phase>
+                                <goals>
+                                    <goal>generate</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
 
+                    <!-- GWT Maven Plugin -->
+<!--                    <plugin>-->
+<!--                        <groupId>org.codehaus.mojo</groupId>-->
+<!--                        <artifactId>gwt-maven-plugin</artifactId>-->
+<!--                        <version>${gwt.version}</version>-->
+<!--                        <executions>-->
+<!--                            <execution>-->
+<!--                                <goals>-->
+<!--                                    <goal>compile</goal>-->
+<!--                                </goals>-->
+<!--                            </execution>-->
+<!--                        </executions>-->
+<!--                        <configuration>-->
+<!--                            <sourceLevel>1.8</sourceLevel>-->
+<!--                            <module>com.lofidewanto.demo.DemoGwtDevelopment</module>-->
+<!--                            <extraJvmArgs>-Xmx1024M -Xss1024k</extraJvmArgs>-->
+<!--                            <runTarget>demogwt.html</runTarget>-->
+<!--                            <persistentunitcachedir>${project.build.directory}</persistentunitcachedir>-->
+<!--                            <webappDirectory>${project.build.directory}/classes/public</webappDirectory>-->
+<!--                            <deploy>${project.build.directory}/gwt-deploy</deploy>-->
+<!--                            <compileReport>true</compileReport>-->
+<!--                            <style>DETAILED</style>-->
+<!--                            <generateJsInteropExports>true</generateJsInteropExports>-->
+<!--                            <launcherDir>${project.build.directory}/classes/public</launcherDir>-->
+<!--                            <codeServerPort>9876</codeServerPort>-->
+<!--                        </configuration>-->
+<!--                    </plugin>-->
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>development-mock</id>
+            <build>
+                <plugins>
+                    <!-- JRebel plugin, you need to turn off Spring Tool! -->
+                    <plugin>
+                        <groupId>org.zeroturnaround</groupId>
+                        <artifactId>jrebel-maven-plugin</artifactId>
+                        <version>1.1.5</version>
+                        <configuration>
+                            <relativePath>.</relativePath>
+                            <classpath>
+                                <fallback>default</fallback>
+                                <resources>
+                                    <resource>
+                                    </resource>
+                                </resources>
+                            </classpath>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>generate-rebel-xml</id>
+                                <phase>process-resources</phase>
+                                <goals>
+                                    <goal>generate</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <!-- GWT Maven Plugin -->
+<!--                    <plugin>-->
+<!--                        <groupId>org.codehaus.mojo</groupId>-->
+<!--                        <artifactId>gwt-maven-plugin</artifactId>-->
+<!--                        <version>${gwt.version}</version>-->
+<!--                        <executions>-->
+<!--                            <execution>-->
+<!--                                <goals>-->
+<!--                                    <goal>compile</goal>-->
+<!--                                </goals>-->
+<!--                            </execution>-->
+<!--                        </executions>-->
+<!--                        <configuration>-->
+<!--                            <sourceLevel>1.8</sourceLevel>-->
+<!--&lt;!&ndash;                            <module>com.lofidewanto.demo.DemoGwtDevelopmentMock</module>&ndash;&gt;-->
+<!--                            <extraJvmArgs>-Xmx1024M -Xss1024k</extraJvmArgs>-->
+<!--                            <runTarget>demogwt.html</runTarget>-->
+<!--                            <persistentunitcachedir>${project.build.directory}</persistentunitcachedir>-->
+<!--                            <webappDirectory>${project.build.directory}/classes/public</webappDirectory>-->
+<!--                            <deploy>${project.build.directory}/gwt-deploy</deploy>-->
+<!--                            <compileReport>true</compileReport>-->
+<!--                            <style>DETAILED</style>-->
+<!--                            <generateJsInteropExports>true</generateJsInteropExports>-->
+<!--                            <launcherDir>${project.build.directory}/classes/public</launcherDir>-->
+<!--                            <codeServerPort>9876</codeServerPort>-->
+<!--                        </configuration>-->
+<!--                    </plugin>-->
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 </project>
-
